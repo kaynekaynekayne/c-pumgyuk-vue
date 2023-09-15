@@ -1,0 +1,102 @@
+순서
+
+1. npm i -g @vue/cli
+2. vue create 프로젝트명 => 전체적인 폴더 생김 (node_modules, public, src, package.json 등등)
+3. npm run serve => start 할 수 있음
+4. cd 프로젝트명
+5. npm run serve
+=> http://localhost:8080/에서 접근 가능
+=> 프로젝트가 정상적으로 만들어짐
+
+
+라우터 설치 (뷰에서 웹페이지 간의 이동 위함)
+6. npm i vue-router --save
+
+뷰 라우터 에러 관련
+https://velog.io/@uxolrv/%EC%97%90%EB%9F%AC-%EC%9D%BC%EC%A7%80-vue-router-%EC%84%A4%EC%B9%98-%EC%97%90%EB%9F%AC
+
+6-1. npm install vue-router@3 (vue2 지원)
+
+
+부트스트랩뷰 (공식문서 get started에 나와있음)
+7. npm install vue bootstrap bootstrap-vue
+8. main.js에 아래 코드 추가
+
+
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+// Import Bootstrap and BootstrapVue CSS files (order is important)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+// Make BootstrapVue available throughout your project
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
+
+
+9. bootstrapvue 공홈->Components->Navbar
+코드 복붙해서 test/src/layout/Header.vue의
+<template> 부분 안에 붙여넣기
+
+* .vue는 <template> <script> <style>로 나뉨
+
+
+10. App.vue 건드림
+
+에러관련
+Component name "header" should always be multi-word
+https://velog.io/@uxolrv/%EC%97%90%EB%9F%AC-%EC%9D%BC%EC%A7%80-Component-name-should-always-be-multi-word
+https://doctorson0309.tistory.com/994
+->vue.config.js에 lintOnSave : false를 추가하고 서버 재가동 하라고
+
+해결😐
+<script>
+    export default {
+        name:"vue-home" <- 추가. name:'vue-about'도 마찬가지
+    }
+</script>
+
+
+Do not use built-in or reserved HTML elements as component id: header
+https://programjy.tistory.com/57
+->일단 export default 안에 있는 내용 주석 처리
+
+Error in render: "TypeError: Cannot read properties of undefined (reading 'matched')
+https://velog.io/@k_jihye92/Error-in-render-TypeError-Cannot-read-properties-of-undefined-reading-matched
+
+해결😐
+const router=new VueRouter({
+    mode:"history",
+    routes:[
+        {
+            path:'/', component:Home
+        },
+        {
+            path:'/about', component:About
+        }
+    ]
+})
+export default router;
+
+// 그 전에는 export derfault router 안 해줬었음
+
+
+11. src/views/Home.vue 만듦
+12. src/views/About.vue 만듦
+
+13. 페이지 이동 위해 router.js 만들고 
+13-1. router 써야 되니까 main.js에 선언
+
+import router from './router';
+
+new Vue({
+  router,
+  render: h => h(App),
+
+}).$mount('#app')
+
+
+
+
+

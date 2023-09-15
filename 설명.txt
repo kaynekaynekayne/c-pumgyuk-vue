@@ -97,6 +97,14 @@ new Vue({
 }).$mount('#app')
 
 
+// vuex
 
+14. npm i vuex
+error: ERESOLVE unable to resolve dependency tree 버전 호환 문제
 
+해결😐
+npm i vuex@3.4.0 --save
+(Vue 2는 Vuex 3을, Vue 3은 Vuex 4를 사용)
 
+14-1. src/store/store.js 생성 후 코드 작성
+14-2. main.js에 store 사용 연결
